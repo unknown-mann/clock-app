@@ -6,6 +6,7 @@ import { timeOfDay, currentTime } from '../utils';
 
 const Wrapper = styled.section`
   width: 600px;
+  height: 390px;
   position: relative;
   top: 45%;
   left: 10%;
@@ -46,7 +47,7 @@ const MoreButton = styled.button.attrs({
   type: 'button'
 })`
   position: absolute;
-  bottom: -40px;
+  bottom: 50px;
   right: -600px;
   width: 150px;
   height: 55px;
