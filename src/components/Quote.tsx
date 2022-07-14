@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { IoReload } from 'react-icons/io5';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchQuote } from '../app/clockSlice';
 
@@ -22,47 +21,29 @@ const QuoteAuthor = styled.div`
     margin-top: 10px;
 `;
 
-const Button = styled.button.attrs({
-    type: 'button'
-})`
-    position: absolute;
-    top: 8px;
-    left: -30px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    opacity: 0.7;
-    :hover {
-        opacity: 1;
-    }
-    :active {
-        opacity: 0.6;
-    }
-`;
-
-const Quote = () => {
+const Quote: React.FC = React.memo(() => {
 
     const dispatch = useAppDispatch();
 
-    const { quote } = useAppSelector(state => state.clock)
+    const { quote, status } = useAppSelector(state => state.clock)
 
     useEffect(() => {
-        dispatch(fetchQuote())
+        if (status === 'idle') {
+            dispatch(fetchQuote())
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <Wrapper>
             <QuoteContent>
-                {`"${quote.content}"`}
+                {quote.content ? `"${quote.content}"` : ''}
             </QuoteContent>
             <QuoteAuthor>
-                {quote.author || 'Unknown author'}
+                {quote.author || ''}
             </QuoteAuthor>
-            <Button onClick={() => {dispatch(fetchQuote())}}>
-                <IoReload size={'20px'}/>
-            </Button>
         </Wrapper>
-    );
-};
+    )
+});
 
 export default Quote;

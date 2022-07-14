@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IoMoon, IoSunny, IoChevronDownCircleOutline, IoChevronUpCircleOutline } from 'react-icons/io5'
-import { timeOfDay, currentTime } from '../utils';
+import { getTimeOfDay, getCurrentTime } from '../utils';
+import { fetchTimeZone } from '../app/clockSlice';
+
 
 const Wrapper = styled.section`
   width: 600px;
@@ -74,19 +76,28 @@ type PropsType = {
   setActive: (arg: boolean) => void
 };
 
-const Clocks: React.FC<PropsType> = ({ active, setActive }) => {
+const Clocks: React.FC<PropsType> = React.memo(({ active, setActive }) => {
 
-  const { clock } = useAppSelector(state => state.clock)
+  const dispatch = useAppDispatch()
+  const { clock, status } = useAppSelector(state => state.clock)
 
-  const TIME = new Date()
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchTimeZone())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  const greet = timeOfDay(TIME)
 
-  const [time, setTime] = useState(currentTime(TIME))
+  const initialTime = new Date()
+
+  const greet = getTimeOfDay(initialTime)
+
+  const [currentTime, setCurrentTime] = useState(getCurrentTime(initialTime))
 
   let interval = (60 - (new Date()).getSeconds()) * 1000;
 
-  setTimeout(() => setTime(currentTime(new Date())), interval)
+  setTimeout(() => setCurrentTime(getCurrentTime(new Date())), interval)
 
   return (
     <Wrapper>
@@ -95,7 +106,7 @@ const Clocks: React.FC<PropsType> = ({ active, setActive }) => {
         {`good ${greet}, it's currently`}
       </Greeting>
       <Time>
-        {time}
+        {currentTime}
         <TimeZone>
           {clock.abbreviation}
         </TimeZone>
@@ -116,7 +127,7 @@ const Clocks: React.FC<PropsType> = ({ active, setActive }) => {
           </>}
       </MoreButton>
     </Wrapper>
-  );
-};
+  )
+});
 
 export default Clocks;

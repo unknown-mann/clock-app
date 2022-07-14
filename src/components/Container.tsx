@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { timeOfDay } from '../utils';
+import { getTimeOfDay } from '../utils';
 import night from "../assets/night.jpg"
 import morning from "../assets/morning.jpg"
 import afternoon from "../assets/afternoon.jpg"
 import evening from "../assets/evening.jpg"
 
 const currentTime = () => {
-    switch (timeOfDay(new Date())) {
+    switch (getTimeOfDay(new Date())) {
         case 'night':
             return night
         case 'morning':

@@ -40,12 +40,16 @@ const clockSlice = createSlice({
             .addCase(fetchTimeZone.pending, (state) => {
                 state.status = 'loading'
             })
+            .addCase(fetchQuote.pending, (state) => {
+                state.status = 'loading'
+            })
             .addCase(fetchTimeZone.fulfilled, (state, action) => {
                 state.clock = action.payload
                 state.status = 'succeeded'
             })
             .addCase(fetchQuote.fulfilled, (state, action) => {
                 state.quote = action.payload
+                state.status = 'succeeded'
             })
             .addMatcher(isEror, (state, action: PayloadAction<string>) => {
                 state.error = action.payload

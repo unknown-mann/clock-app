@@ -1,4 +1,4 @@
-export const currentTime = (currentDate: Date) => {
+export const getCurrentTime = (currentDate: Date) => {
 
     const currentHour = currentDate.getHours();
     const currentMinute = currentDate.getMinutes();
@@ -20,7 +20,7 @@ export const currentTime = (currentDate: Date) => {
     return `${hour}:${minute}`
 }
 
-export const timeOfDay = (currentDate: Date) => {
+export const getTimeOfDay = (currentDate: Date) => {
 
     const currentHour = currentDate.getHours();
 
