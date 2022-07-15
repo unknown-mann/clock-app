@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IoMoon, IoSunny, IoChevronDownCircleOutline, IoChevronUpCircleOutline } from 'react-icons/io5'
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { getTimeOfDay, getCurrentTime } from '../utils';
 import { fetchTimeZone } from '../app/clockSlice';
 
 
 const Wrapper = styled.section`
-  width: 600px;
-  height: 390px;
   position: relative;
   top: 45%;
   left: 10%;
+  width: 600px;
+  height: 390px;
   font-family: "Inter", sans-serif;
   color: white;
   text-transform: uppercase;
@@ -51,6 +51,7 @@ const MoreButton = styled.button.attrs({
   position: absolute;
   bottom: 50px;
   right: -600px;
+  z-index: 1;
   width: 150px;
   height: 55px;
   display: flex;
@@ -59,13 +60,12 @@ const MoreButton = styled.button.attrs({
   padding: 20px;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 2rem;
   color: rgba(0, 0, 0, 0.5);
   letter-spacing: 0.3rem;
   background: #fff;
   border: none;
+  border-radius: 2rem;
   cursor: pointer;
-  z-index: 1;
   :hover {
     color: rgba(0, 0, 0, 1);
   }
@@ -86,7 +86,7 @@ const Clocks: React.FC<PropsType> = React.memo(({ active, setActive }) => {
       dispatch(fetchTimeZone())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
 
   const initialTime = new Date()

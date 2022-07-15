@@ -31,7 +31,7 @@ const Quote: React.FC = React.memo(() => {
         if (status === 'idle') {
             dispatch(fetchQuote())
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

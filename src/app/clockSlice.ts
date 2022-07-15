@@ -22,14 +22,14 @@ export const fetchQuote = createAsyncThunk<QuoteType, undefined, { rejectValue: 
             return rejectWithValue(error.message)
         }
     }
-)
+);
 
 const initialState: StateType = {
     clock: {},
     quote: {},
     status: 'idle',
     error: null
-}
+};
 
 const clockSlice = createSlice({
     name: 'clock',
@@ -56,10 +56,10 @@ const clockSlice = createSlice({
                 state.status = 'rejected'
             })
     }
-})
+});
 
 const isEror = (action: AnyAction) => {
     return action.type.endsWith('rejected')
-}
+};
 
 export default clockSlice.reducer

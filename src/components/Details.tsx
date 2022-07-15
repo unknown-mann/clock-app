@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Wrapper = styled(motion.section)`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(30px);
-    color: white;
-    padding: 50px 0 50px 120px;
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 50px 0 50px 120px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(30px);
 `;
 
 const Detail = styled.div`
@@ -34,7 +34,7 @@ const Content = styled.div`
 
 const Details = () => {
 
-    const { clock } = useAppSelector(state => state.clock)
+    const { clock } = useAppSelector(state => state.clock);
 
     const {
         timezone,
@@ -46,9 +46,9 @@ const Details = () => {
     return (
         <AnimatePresence>
             <Wrapper
-             initial={{y: 500}} 
-             animate={{y: 0}} 
-             transition={{ duration: 0.5, type: 'ease' }}  >
+                initial={{ y: 500 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.5, type: 'ease' }}  >
                 <Detail>
                     <Title>CURRENT TIMEZONE</Title>
                     <Content>{timezone}</Content>

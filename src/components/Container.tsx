@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTimeOfDay } from '../utils';
 import night from "../assets/night.jpg"
 import morning from "../assets/morning.jpg"
 import afternoon from "../assets/afternoon.jpg"
 import evening from "../assets/evening.jpg"
+import { getTimeOfDay } from '../utils';
 
 const currentTime = () => {
     switch (getTimeOfDay(new Date())) {
@@ -20,20 +20,17 @@ const currentTime = () => {
 }
 
 const ContainerEl = styled.main`
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    min-width: 100vw;
+    width: 1450px;
+    height: 100vh;
     background-image: url(${currentTime()});
     background-size: cover;
 `;
 
 type PropsType = {
     children: React.ReactNode
-}
+};
 
 const Wrapper: React.FC<PropsType> = ({children}) => {
     return (
